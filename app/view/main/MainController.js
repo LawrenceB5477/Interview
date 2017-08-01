@@ -39,9 +39,19 @@ Ext.define('Interview.view.main.MainController', {
 
     onNameSelected : function(sender, record) {
         var userform = this.getView().lookupReference("usermanagement");
-        console.log(record[0].data);
         userform.setValues(record[0].data);
         Ext.toast("User Data Loaded!")
-    }
+    },
 
+    buttonClick : function() {
+        Ext.Ajax.request({
+            url: "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=AAPL&interval=1min&outputsize=compact&apikey=KZQ1V4YS1MQ6UPBZ",
+            method: "GET",
+
+            success: function(response) {
+                var jsondata = Ext.JSON.decode(response.responseText);
+                console.log(jsondata);
+            }
+        });
+    }
 });

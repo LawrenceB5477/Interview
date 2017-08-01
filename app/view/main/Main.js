@@ -25,23 +25,21 @@ Ext.define('Interview.view.main.Main', {
 
     items: [
         {
+            xtype: "panel",
             title: 'Stock Prices',
             iconCls: 'x-fa fa-bar-chart',
             layout: 'fit',
             // The following grid shares a store with the classic version's grid as well!
             items: [{
-                xtype: 'mainlist'
+                xtype: 'stockgrid'
             }]
+
         },{
             title: 'Account Positions',
             iconCls: 'x-fa fa-usd',
         },{
             title: 'Buy / Trade',
             iconCls: 'x-fa fa-shopping-bag',
-            layout: "fit",
-            items: [{
-                xtype: "mainlist"
-            }]
         },{
             //TODO figure out form validation, move the damn submit button higher!
             xtype: "container",
