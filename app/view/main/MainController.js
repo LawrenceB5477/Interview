@@ -10,12 +10,6 @@ Ext.define('Interview.view.main.MainController', {
     onItemSelected: function (sender, record) {
     },
 
-    onConfirm: function (choice) {
-        if (choice === 'yes') {
-            //
-        }
-    },
-
     //TODO figure out if there is a better way to do this
     onSubmit: function (sender, result) {
         var userform = this.getView().lookupReference("usermanagement");
@@ -32,8 +26,10 @@ Ext.define('Interview.view.main.MainController', {
                 "password": values.password
                 });
         });
-
         userform.reset();
+
+        var gridtoolbartitle = this.getView().lookupReference("gridtitle");
+        gridtoolbartitle.setTitle("Welcome, " + values.name);
         Ext.toast("User Data Updated!");
     },
 
@@ -50,7 +46,29 @@ Ext.define('Interview.view.main.MainController', {
 
             success: function(response) {
                 var jsondata = Ext.JSON.decode(response.responseText);
-                console.log(jsondata);
+
+                //Fetch the meta data of the JSON
+                var metaData = {};
+                Ext.Object.each(jsondata["Meta Data"], function(a, b){
+                    metaData[a.substring(3).toLowerCase()] = b;
+                });
+
+                //Fetch the stock prices.
+                var data = [];
+                Ext.Object.each(jsondata["Time Series (1min)"], function(k, v){
+                    var d = {};
+                    d.time = k;
+                    d.ticker = metaData.symbol;
+                    Ext.Object.each(v, function(c, e){
+                        d[c.substring(3).toLowerCase()] = e;
+                    })
+                    d.time = metaData["time zone"] + " : " + d.time;
+                    data.push(d);
+                });
+
+                var stockStore = Ext.data.StoreManager.lookup("stockquotes");
+                stockStore.setData(data);
+                Ext.toast("Stock Data Fetched!");
             }
         });
     }

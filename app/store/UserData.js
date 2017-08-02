@@ -5,6 +5,8 @@ Ext.define('Interview.store.UserData', {
 
     model: 'Interview.model.UserData',
 
+    storeId: "userData",
+
     data: { items: [
         { name: 'John 117', lastname: "Spartan", email: "masterchief@gmail.com", password: "alloutofgum" }
     ]},

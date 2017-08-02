@@ -12,19 +12,30 @@ Ext.define('Interview.view.main.StockGrid', {
     title: 'Stock Prices',
 
     store: {
-        type: 'personnel'
+        storeId: "stockquotes",
+        fields: [
+            "ticker", "time", "high", "low", "volume", "open", "close"
+        ]
     },
 
     columns: [
-        { text: 'Ticker',  dataIndex: 'name' },
-        { text: 'Date', dataIndex: 'email', flex: 1 },
-        { text: 'High', dataIndex: 'phone', flex: 1 }
+        { text: "Ticker", dataIndex: "ticker", flex: .5},
+        { text: 'Time',  dataIndex: 'time', flex: 1.5},
+        { text: 'High', dataIndex: 'high', flex: 1 },
+        { text: 'Low', dataIndex: 'low', flex: 1 },
+        { text: "Volume", dataIndex: "volume", flex: 1},
+        { text: "Open", dataIndex: "open", flex: 1},
+        { text: "Close", dataIndex: "close", flex:1}
     ],
 
 
     items: [{
         xtype: "toolbar",
         docked: "top",
+        reference: "gridtitle",
+        bind: {
+            title: "Welcome, John",
+        },
         items: [{
             xtype: "button",
             text: "Fetch Stock Data",
