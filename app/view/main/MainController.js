@@ -71,5 +71,11 @@ Ext.define('Interview.view.main.MainController', {
                 Ext.toast("Stock Data Fetched!");
             }
         });
+    },
+
+    stockClicked : function(sender, record) {
+        Ext.toast("It's working.");
+        console.log(record);
+        console.log(record[0].data.high);
     }
 });

@@ -25,7 +25,6 @@ Ext.define('Interview.view.main.Main', {
 
     items: [
         {
-            xtype: "panel",
             title: 'Stock Prices',
             iconCls: 'x-fa fa-bar-chart',
             layout: 'fit',
@@ -37,6 +36,10 @@ Ext.define('Interview.view.main.Main', {
         },{
             title: 'Account Positions',
             iconCls: 'x-fa fa-usd',
+            layout: "fit",
+            items: [{
+                xtype: "accountgrid"
+            }]
         },{
             title: 'Buy / Trade',
             iconCls: 'x-fa fa-shopping-bag',
@@ -52,8 +55,8 @@ Ext.define('Interview.view.main.Main', {
                 reference: "usermanagement",
                 align: "left",
                 flex: 1,
-                buttons: {
-                    submit: "onSubmit"},
+                //buttons: {
+                  // submit: "onSubmit"},
                 items: [{
                     xtype: 'textfield',
                     name: 'name',
@@ -70,6 +73,16 @@ Ext.define('Interview.view.main.Main', {
                     xtype: 'passwordfield',
                     name: 'password',
                     label: 'Password',
+                }, {
+                    xtype: "toolbar",
+                    docked: "bottom",
+                    ui: "light",
+                    items: [{
+                        xtype: "button",
+                        handler: "onSubmit",
+                        text: "submit",
+                        left: 0,
+                    }]
                 }]
 
             }, {

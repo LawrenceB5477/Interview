@@ -5,10 +5,6 @@ Ext.define('Interview.view.main.StockGrid', {
     extend: 'Ext.grid.Grid',
     xtype: 'stockgrid',
 
-    requires: [
-        'Interview.store.Personnel'
-    ],
-
     title: 'Stock Prices',
 
     store: {
@@ -43,5 +39,9 @@ Ext.define('Interview.view.main.StockGrid', {
             iconCls: 'x-fa fa-rocket',
             handler: 'buttonClick'
         }]
-    }]
+    }],
+
+    listeners: {
+        select: "stockClicked"
+    }
 });
